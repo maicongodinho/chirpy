@@ -6,8 +6,14 @@ import (
 )
 
 func main() {
+	// File system handler
+	fileServer := http.FileServer(http.Dir("."))
+
 	// Create a new ServeMux
 	mux := http.NewServeMux()
+
+	// Handle root endpoint with file system handler
+	mux.Handle("/", fileServer)
 
 	// Create a new http.Server struct
 	server := &http.Server{
